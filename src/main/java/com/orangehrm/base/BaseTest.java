@@ -5,22 +5,27 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import com.orangehrm.utils.ConfigReader;
 
 public class BaseTest {
 
     protected WebDriver driver;
 
     @BeforeMethod
-    public void setup() throws InterruptedException {
+    public void setup() {
 
-        WebDriverManager.chromedriver().setup();
+        ConfigReader config = new ConfigReader();
 
-        driver = new ChromeDriver();
+        String browser = config.getProperty("browser");
+
+        if (browser.equalsIgnoreCase("chrome")) {
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver();
+        }
 
         driver.manage().window().maximize();
 
-        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
-
+        driver.get(config.getProperty("url"));
     }
 
     @AfterMethod

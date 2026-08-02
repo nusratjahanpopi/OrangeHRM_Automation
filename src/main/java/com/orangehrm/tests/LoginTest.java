@@ -2,6 +2,7 @@ package com.orangehrm.tests;
 
 import com.orangehrm.base.BaseTest;
 import com.orangehrm.pages.LoginPage;
+import com.orangehrm.utils.ConfigReader;
 import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
@@ -11,6 +12,11 @@ public class LoginTest extends BaseTest {
 
         LoginPage loginPage = new LoginPage(driver);
 
-        loginPage.login("Admin", "admin123");
+        ConfigReader config = new ConfigReader();
+
+        loginPage.login(
+                config.getProperty("username"),
+                config.getProperty("password")
+        );
     }
 }
