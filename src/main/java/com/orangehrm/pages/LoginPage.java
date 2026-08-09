@@ -1,19 +1,17 @@
 package com.orangehrm.pages;
 
+import com.orangehrm.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import java.time.Duration;
-
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 public class LoginPage {
 
-    WebDriver driver;
+    private WebDriver driver;
+    private WaitUtils waitUtils;
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
+        this.waitUtils = new WaitUtils(driver);
     }
 
     By username = By.name("username");
@@ -22,14 +20,13 @@ public class LoginPage {
 
     public void login(String user, String pass) {
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(username))
+        waitUtils.waitForElementVisible(username)
                 .sendKeys(user);
 
-        driver.findElement(password).sendKeys(pass);
+        waitUtils.waitForElementVisible(password)
+                .sendKeys(pass);
 
-        wait.until(ExpectedConditions.elementToBeClickable(loginBtn))
+        waitUtils.waitForElementClickable(loginBtn)
                 .click();
     }
 }

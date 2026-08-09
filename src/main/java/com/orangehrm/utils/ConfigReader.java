@@ -13,8 +13,11 @@ public class ConfigReader {
         properties = new Properties();
 
         try {
-            FileInputStream file = new FileInputStream("src/main/resources/config.properties");
+            FileInputStream file =
+                    new FileInputStream("src/main/resources/config.properties");
+
             properties.load(file);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
