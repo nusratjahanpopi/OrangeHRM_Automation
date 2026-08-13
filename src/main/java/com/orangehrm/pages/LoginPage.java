@@ -17,6 +17,7 @@ public class LoginPage {
     By username = By.name("username");
     By password = By.name("password");
     By loginBtn = By.xpath("//button[@type='submit']");
+    By dashboard = By.xpath("//h6[text()='Dashboard']");
 
     public void login(String user, String pass) {
 
@@ -28,5 +29,13 @@ public class LoginPage {
 
         waitUtils.waitForElementClickable(loginBtn)
                 .click();
+    }
+    public boolean isLoginSuccessful() {
+        try {
+            waitUtils.waitForElementVisible(dashboard);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
