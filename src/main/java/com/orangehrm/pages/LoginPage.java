@@ -17,7 +17,7 @@ public class LoginPage {
     By username = By.name("username");
     By password = By.name("password");
     By loginBtn = By.xpath("//button[@type='submit']");
-    By dashboard = By.xpath("//h6[text()='Dashboard']");
+    By dashboard = By.xpath("//h6[normalize-space()='Dashboard']");
 
     public void login(String user, String pass) {
 
@@ -33,6 +33,18 @@ public class LoginPage {
     public boolean isLoginSuccessful() {
         try {
             waitUtils.waitForElementVisible(dashboard);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    public boolean isDashboardDisplayed() {
+        return waitUtils.waitForElementVisible(dashboard).isDisplayed();
+    }
+    public boolean isLoginErrorDisplayed() {
+        try {
+            By errorMessage = By.xpath("//p[contains(@class,'oxd-alert-content-text')]");
+            waitUtils.waitForElementVisible(errorMessage);
             return true;
         } catch (Exception e) {
             return false;

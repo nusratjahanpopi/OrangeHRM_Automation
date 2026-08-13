@@ -13,7 +13,7 @@ public class WaitUtils {
     private WebDriverWait wait;
 
     public WaitUtils(WebDriver driver) {
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
     public WebElement waitForElementVisible(By locator) {
