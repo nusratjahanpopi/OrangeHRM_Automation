@@ -50,4 +50,26 @@ public class LoginPage {
             return false;
         }
     }
+    public boolean isUsernameRequiredDisplayed() {
+        try {
+            By usernameError = By.xpath("//input[@name='username']/following::span[contains(@class,'oxd-input-field-error-message')][1]");
+
+            waitUtils.waitForElementVisible(usernameError);
+
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    public boolean isPasswordRequiredDisplayed() {
+        try {
+            By passwordError = By.xpath("//input[@name='password']/following::span[contains(@class,'oxd-input-field-error-message')][1]");
+
+            waitUtils.waitForElementVisible(passwordError);
+
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

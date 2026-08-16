@@ -37,4 +37,39 @@ public class LoginTest extends BaseTest {
                 "Login error message was not displayed"
         );
     }
+
+    @Test
+    public void emptyUsernameTest() {
+
+        LoginPage loginPage = new LoginPage(driver);
+
+        ConfigReader config = new ConfigReader();
+
+        loginPage.login(
+                "",
+                config.getProperty("password")
+        );
+
+        Assert.assertTrue(
+                loginPage.isUsernameRequiredDisplayed(),
+                "Username required message was not displayed"
+        );
+    }
+    @Test
+    public void emptyPasswordTest() {
+
+        LoginPage loginPage = new LoginPage(driver);
+
+        ConfigReader config = new ConfigReader();
+
+        loginPage.login(
+                config.getProperty("username"),
+                ""
+        );
+
+        Assert.assertTrue(
+                loginPage.isPasswordRequiredDisplayed(),
+                "Password required message was not displayed"
+        );
+    }
 }
